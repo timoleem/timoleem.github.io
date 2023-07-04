@@ -1,0 +1,60 @@
+.title {
+  text-align: center;
+  color: red;
+  background-color: white;
+}
+
+div .image {
+    position: absolute;
+    filter: grayscale(100%);
+    display: block;
+    height: 250px;
+    top: 0;
+}
+
+#imagesMain {
+  padding-left: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.imagebox {
+  position: relative;
+  height: 300px;
+  width: 300px;
+  float: left;
+  margin: 10px;
+}
+
+.imagebox img {
+  vertical-align: middle;
+  height: 300px;
+  width: 300px;
+}
+
+.new_image{
+  position: relative;
+  opacity: 0;
+  height: 300px;
+  width: 300px;
+  top: -300px;
+  float: left;
+}
+
+.imagebox:hover img{
+  opacity: 0;
+  text-align:justify;
+  color:#000000;
+  font-weight:700;
+  font-family:"Times New Roman", Times, serif;
+}
+
+.imagebox:hover .new_image{
+  opacity: 1;
+  text-align:justify;
+  color:#000000;
+  font-weight:700;
+  font-family:"Times New Roman", Times, serif;
+}
