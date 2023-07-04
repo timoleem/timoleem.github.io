@@ -4,14 +4,6 @@
   background-color: white;
 }
 
-div .image {
-    position: absolute;
-    filter: grayscale(100%);
-    display: block;
-    height: 250px;
-    top: 0;
-}
-
 #imagesMain {
   padding-left: 10%;
   margin-left: auto;
