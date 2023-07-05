@@ -24,7 +24,7 @@
 .imagebox img {
   vertical-align: middle;
   height: 100%;
-  width: auto;
+  width: auto;  
 }
 
 .new_image{
@@ -73,7 +73,7 @@ html {
  }
 
 .item_box{
-  padding-top: 80%;
+  padding-top: 300px;
 }
 
  #general, #styles, #about {
@@ -85,4 +85,20 @@ html {
 .item {
   text-align: center;
   font-size: 25px;
+}
+
+.welcome {
+  padding-top: 350px;
+}
+
+h2 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #4CAF50;
+}
+
+p {
+  text-indent: 50px;
+  text-align: justify;
+  letter-spacing: 2px;
 }
