@@ -6,55 +6,47 @@
 /* Images main page */
 
 #imagesMain {
-  padding-left: 10%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  text-align: center;
+  max-width: 900px;
+  height: 300px;
+  margin: 60px auto 60px auto;
+}
+
+#outer {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 
 .imagebox {
-  position: relative;
-  height: 300px;
-  width: 300px;
-  float: left;
-  margin: 10px;
+  display: table-cell;
+  vertical-align: top;
+  width: 100%;
 }
 
 .imagebox img {
-  vertical-align: middle;
-  height: 100%;
-  width: auto;  
+  max-width: 100%;
+  height: auto;
 }
 
-.new_image{
-  position: relative;
-  opacity: 0;
-  height: 100%;
-  width: auto;
+.new_image {
+  position:relative;
+  max-width: 100%;
+  height: auto;
   top: -300px;
-  float: left;
+  opacity: 0;
 }
 
 .imagebox:hover img{
   opacity: 0;
-  text-align:justify;
-  color:#000000;
-  font-weight:700;
-  font-family:"Times New Roman", Times, serif;
 }
 
 .imagebox:hover .new_image{
   opacity: 1;
-  text-align:justify;
-  color:#000000;
-  font-weight:700;
-  font-family:"Times New Roman", Times, serif;
 }
 
 .textfield {
-  position: absolute;
-  top: 5%;
+  position:relative;
+  top: -600px;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -76,11 +68,11 @@ html {
   padding-top: 300px;
 }
 
- #general, #styles, #about {
-   margin-top: 25px;
-   padding-bottom: 15%;
-   background-color: pink;
- }
+#general, #styles, #about {
+  margin-top: 25px;
+  padding-bottom: 15%;
+  background-color: #F7FFD8;
+}
 
 .item {
   text-align: center;
@@ -88,7 +80,13 @@ html {
 }
 
 .welcome {
-  padding-top: 350px;
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+  text-align: center;
+  line-height: 1.5;
+  /* display: inline-block; */
+  /* vertical-align: middle; */
 }
 
 h2 {
