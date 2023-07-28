@@ -81,10 +81,6 @@ html {
   background-color: #F7FFD8;
 }
 
-.item_box{
-  height: 300%;
-}
-
 .item {
   text-align: center;
   font-size: 25px;
@@ -109,10 +105,20 @@ p {
 
 .info_field {
   display: inline-block;
-  width: 200px;
-  height: 500px;
-  background-color: lightgray;
+  width: 20%;
+  padding-left: 20%;
+  height: 60vh;
+  background-color: #fffdf2;
 }
 .info_container  {
   text-align: center;
+}
+
+.dragon_image {
+
+  /* invert colour */
+  -webkit-filter: invert(1);
+  filter: invert(1);
+  /* mirror image */
+  transform: rotateX(180deg);
 }
