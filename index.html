@@ -5,6 +5,9 @@
 </head>
 
 <body>
+
+  <button onclick="topFunction()" id="move_up" title="Go to top">Top</button>
+
   <div class="first_box">
     <h1 class="title" id="title_page">Wushu Amsterdam - Modern Style</h1>
 
@@ -45,25 +48,45 @@
       <div class="info_field"></div>
       <div class="info_field"></div>
     </div>
-    <a href="#title_page">main-page</a>
   </div>
   <div class="item" id="styles">
     <h2 style="padding-top:20px">Wushu styles</h2>
     <div class="info_container">
-      <div class="info_field"></div>
-      <div class="info_field"></div>
+      <div class="wushu_style"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
+      <div class="wushu_style"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
+      <div class="wushu_style"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
+      <div class="wushu_style"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
     </div>
-    <a href="#title_page">main-page</a>
   </div>
   <div class="item" id="about">
     <h2 style="padding-top:20px">About</h2>
     <div class="info_container">
       <div class="info_field"></div>
       <div class="info_field"></div>
-    </div>    
-    <a href="#title_page">main-page</a>
+    </div>
   </div>
 
+<script>
+  // Get the button
+  let mybutton = document.getElementById("move_up");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 200) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
 
 
 </body>
