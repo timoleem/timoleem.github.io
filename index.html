@@ -5,7 +5,7 @@
 </head>
 
 <body>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <button onclick="topFunction()" id="move_up" title="Go to top">Top</button>
 
   <div class="first_box">
@@ -52,16 +52,33 @@
   <div class="item" id="styles">
     <h2 style="padding-top:20px">Wushu styles</h2>
     <div class="info_container">
-      <div class="wushu_style"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
-      <div class="wushu_style"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
-      <div class="wushu_style"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
-      <div class="wushu_style"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
+      <div class="project1 btn" data-project="1"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
+      <div class="project2 btn" data-project="2"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
+      <div class="project3 btn" data-project="3"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
+      <div class="project4 btn" data-project="4"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
     </div>
+
+    <div class="project1 content" data-project="1">
+      <p>Chang quan <br><br> Long fist</p>
+    </div>
+
+    <div class="project2 content" data-project="2">
+      <p>Nan quan <br><br> Southern fist</p>
+    </div>
+
+    <div class="project3 content" data-project="3">
+      <p>Weapons</p>
+    </div>
+
+    <div class="project4 content" data-project="4">
+      <p>Traditional forms</p>
+    </div>
+
   </div>
   <div class="item" id="about">
     <h2 style="padding-top:20px">About</h2>
     <div class="info_container">
-      <div class="info_field"></div>
+      <div class="abou_field"></div>
       <div class="info_field"></div>
     </div>
   </div>
@@ -86,6 +103,12 @@
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
+
+  $('div[class*="project"]').click(function (e) {
+      var project = $(this).data("project");        //Get the data-project of the clicked element
+      $(".content.project" + project).toggle();     //Toggle the element with content and project class
+  });
+
 </script>
 
 

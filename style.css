@@ -143,7 +143,7 @@ p {
 
 /* wushu styles */
 
-.wushu_style {
+.btn {
   padding-top: 10vh;
   padding-bottom: 20vh;
   display: inline-block;
@@ -157,6 +157,20 @@ p {
   position: relative;
   height: 25vh;
   border-radius: 40%;
+}
+
+.content{
+  position: fixed;
+  width: 700px;
+  height: 200px;
+  padding: 10px;
+  border: 3px solid #147d43;
+  background-color: #9b2948;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display : none;
+  color: white;
 }
 
 .info_container  {
