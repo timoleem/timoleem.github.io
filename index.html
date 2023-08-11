@@ -52,27 +52,50 @@
 
   <div class="item" id="styles">
     <h2 style="padding-top:20px">Wushu styles</h2>
-    <div class="info_container">
-      <div class="frame"><img class="style_image" src="img/changquan_start.jpeg" data-id="divId1"/></div>
-      <div class="frame"><img class="style_image" src="img/nanquan_start.jpeg" data-id="divId2"/></div>
-      <div class="frame"><img class="style_image" src="img/jian_gongbu.jpeg" data-id="divId3"/></div>
-      <div class="frame"><img class="style_image" src="img/traditional.jpeg" data-id="divId4"/></div>
+
+    <div class="body_images" style="height:30vh">
+      <div class="parentBlock">
+        <div class="block">
+          <img src="img/jian_wit.png" alt="image1"/>
+          <img src="img/jian_geel.png" alt="image2" data-id="divId1"/>
+        </div>
+        <div class="block">
+          <img src="img/jian_wit.png" alt="image3"/>
+          <img src="img/jian_geel.png" alt="image4" data-id="divId2"/>
+        </div>
+        <div class="block">
+          <img src="img/jian_wit.png" alt="image5"/>
+          <img src="img/jian_geel.png" alt="image6" data-id="divId3"/>
+        </div>
+        <div class="block">
+          <img src="img/jian_wit.png" alt="image7"/>
+          <img src="img/jian_geel.png" alt="image8" data-id="divId4"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="hideDivs", style="display:block">
+      <p>Wushu was developed in China after 1949, in an effort to standardize the practice of traditional Chinese martial arts and has since been evolving its two disciplines: taolu (套路, forms) and sanda (散打, sparring). Taolu consists of two main fist styles: changquan (long fist) and nanquan (southern fist).</p>
     </div>
 
     <div id="divId1" class="hideDivs">
-      <p><br>Chang quan <br><br> Long fist</p>
+      <p><br>Chang quan</p>
+      <p style="font-size:18px"><br>Changquan (simplified Chinese: 长拳; traditional Chinese: 長拳), also konwn as 'Long Fist', refers to a family of external (as opposed to internal) martial arts (kung fu) styles from northern China. The forms of the Long Fist style emphasize fully extended kicks and striking techniques, and by appearance would be considered a long-range fighting system. The Long Fist style is considered to contain a good balance of hand and foot techniques, but in particular it is renowned for its impressive acrobatic kicks.[2] In demonstration events, Long Fist techniques are most popular and memorable for their whirling, running, leaping, and acrobatics. Contemporary changquan moves are difficult to perform, requiring great flexibility and athleticism comparable to that of gymnastics.</p>
     </div>
 
     <div id="divId2" class="hideDivs">
-      <p><br>Nan quan <br><br> Southern fist</p>
+      <p><br>Nan quan</p>
+      <p style="font-size:18px"><br>Contemporary Nanquan features vigorous, athletic movements with very stable, low stances, extensive hand techniques and a vocal articulation called fasheng ("release shout"), which is the predecessor of the Japanese and Korean martial arts kiai. Power is driven from sharp waist movements with special emphasis on fast stance transition to generate power and speed in the arms.</p>
     </div>
 
     <div id="divId3" class="hideDivs">
       <p><br>Weapons</p>
+      <p style="font-size:18px"><br>Dao (pronunciation: [táʊ], Chinese: 刀; pinyin: dāo) are single-edged Chinese swords, primarily used for slashing and chopping. Jianshu. Nandao. Taijijian. Taijishan. Gunshu. Qiangshu. Nangun. </p>
     </div>
 
     <div id="divId4" class="hideDivs">
       <p><br>Traditional forms</p>
+      <p style="font-size:18px"><br>The majority of routines used in the sport are new, modernized recompilations of traditional routines. However, routines taken directly from traditional styles, including the styles that are not part of standard events, may be performed in competition, especially in China. Many of these styles though are events in the World Kung Fu Championships, another IWUF-run event which is exclusively for traditional styles of wushu. The more commonly seen routines include: <br><br> Baguazhang (八卦掌) – Eight-Trigrams Palm. Bajiquan (八極拳/八极拳) – Eight Extremes Fist/Boxing. Chāquán (查拳) – Cha Fist/Boxing. Chuōjiǎo (戳腳/戳脚) – Poking Feet. Ditangquan (地躺拳) – Ground-Prone Fist/Boxing. Fānziquán (翻子拳) – Tumbling Fist/Boxing. Houquan (猴拳) – Monkey Fist/Boxing. and more</p>
     </div>
 
   </div>
@@ -106,9 +129,9 @@
   }
 
   $("img").on('click',function(){
-    var hello = $(this).attr('data-id');
+    var style = $(this).attr('data-id');
     $('.hideDivs').hide();
-    $('#'+hello).show();
+    $('#'+style).show();
   });
 
 </script>
