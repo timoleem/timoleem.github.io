@@ -78,7 +78,7 @@ html {
   /* margin-top: 100px; */
   height: 100vh;
   box-sizing: border-box;
-  background-color: #FF6103;
+  background-color: #D43D1A;
 }
 
 #styles {
@@ -143,34 +143,29 @@ p {
 
 /* wushu styles */
 
-.btn {
+.frame {
   padding-top: 10vh;
   padding-bottom: 20vh;
   display: inline-block;
   width: 20%;
-  height: 20vh;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .style_image {
   position: relative;
-  height: 25vh;
+  height: 20vh;
   border-radius: 40%;
 }
 
-.content{
-  position: fixed;
-  width: 700px;
-  height: 200px;
-  padding: 10px;
-  border: 3px solid #147d43;
-  background-color: #9b2948;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.hideDivs{
   display : none;
+  position: relative;
+  width: 80%;
+  height: 300px;
+  border: 3px solid #FF8C00;
+  background-color: #E04006;
   color: white;
+  left: 10%;
+  top: -15%;
 }
 
 .info_container  {

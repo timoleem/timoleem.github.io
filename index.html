@@ -49,29 +49,30 @@
       <div class="info_field"></div>
     </div>
   </div>
+
   <div class="item" id="styles">
     <h2 style="padding-top:20px">Wushu styles</h2>
     <div class="info_container">
-      <div class="project1 btn" data-project="1"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
-      <div class="project2 btn" data-project="2"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
-      <div class="project3 btn" data-project="3"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
-      <div class="project4 btn" data-project="4"><img class="style_image" src="img/changquan_start.jpeg" alt="image1"/></div>
+      <div class="frame"><img class="style_image" src="img/changquan_start.jpeg" data-id="divId1"/></div>
+      <div class="frame"><img class="style_image" src="img/nanquan_start.jpeg" data-id="divId2"/></div>
+      <div class="frame"><img class="style_image" src="img/jian_gongbu.jpeg" data-id="divId3"/></div>
+      <div class="frame"><img class="style_image" src="img/traditional.jpeg" data-id="divId4"/></div>
     </div>
 
-    <div class="project1 content" data-project="1">
-      <p>Chang quan <br><br> Long fist</p>
+    <div id="divId1" class="hideDivs">
+      <p><br>Chang quan <br><br> Long fist</p>
     </div>
 
-    <div class="project2 content" data-project="2">
-      <p>Nan quan <br><br> Southern fist</p>
+    <div id="divId2" class="hideDivs">
+      <p><br>Nan quan <br><br> Southern fist</p>
     </div>
 
-    <div class="project3 content" data-project="3">
-      <p>Weapons</p>
+    <div id="divId3" class="hideDivs">
+      <p><br>Weapons</p>
     </div>
 
-    <div class="project4 content" data-project="4">
-      <p>Traditional forms</p>
+    <div id="divId4" class="hideDivs">
+      <p><br>Traditional forms</p>
     </div>
 
   </div>
@@ -104,9 +105,10 @@
     document.documentElement.scrollTop = 0;
   }
 
-  $('div[class*="project"]').click(function (e) {
-      var project = $(this).data("project");        //Get the data-project of the clicked element
-      $(".content.project" + project).toggle();     //Toggle the element with content and project class
+  $("img").on('click',function(){
+    var hello = $(this).attr('data-id');
+    $('.hideDivs').hide();
+    $('#'+hello).show();
   });
 
 </script>
