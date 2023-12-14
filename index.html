@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <button onclick="topFunction()" id="move_up" title="Go to top">Top</button>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <button onclick="topFunction()" id="move_up" title="Go to top">Top</button>
 
@@ -26,7 +30,7 @@
           </a>
         </div>
         <div class="block">
-          <a href="#about">
+          <a href="#contact">
             <img src="img/wubuquan_start.jpeg" alt="image5"/>
             <img src="img/wubuquan_gif.gif" alt="image6"/>
           </a>
@@ -35,9 +39,22 @@
     </div>
 
     <div class="welcome">
-      <h2>Welcome</h2>
-      <p> We are practitioners of the martial arts "Wushu" (which translates itself to martial (武; wǔ) and arts (術, shù)). We practice various styles and forms, though mostly focussing on more modern styles. The trainings are open to all levels, no matter how green you are considering your level of kungfu. Feel free to join us at our trainings! <br><br> Besides a general website for trainings, we also aim to become a kind of wushu database, but that is future talk.
-      </p>
+      <!-- Language Dropdown -->
+      <div class="language-dropdown">
+        <label for="language-select">Select Language:</label>
+        <select id="language-select" onchange="changeLanguage()">
+          <option value="english">English</option>
+          <option value="nederlands">Nederlands</option>
+        </select>
+      </div>
+        <div class="welcome" id="welcome-english">
+          <h2>Welcome</h2>
+          <p>We are practitioners of the martial arts "Wushu" (which translates itself to martial (武; wǔ) and arts (術, shù)). We practice various styles and forms, though mostly focussing on more modern styles. The trainings are open to all levels, no matter how green you are considering your level of kungfu. Feel free to join us at our trainings!</p>
+        </div>
+        <div class="welcome" id="welcome-nederlands" style="display:none;">
+          <h2>Welkom</h2>
+          <p>Wij zijn beoefenaars van de vechtsport "Wushu" (wat zich vertaalt naar krijgskunst (武; wǔ) en kunst (術, shù)). We beoefenen verschillende stijlen en vormen, maar richten ons vooral op meer moderne stijlen. De trainingen staan open voor alle niveaus, ongeacht hoe groen je bent qua kungfu-niveau. Voel je vrij om deel te nemen aan onze trainingen!<p>
+        </div>
     </div>
   </div>
 
@@ -46,9 +63,16 @@
     <h2 style="padding-top:20px">General information</h2>
     <div class="info_container">
       <div class="info_field">
-        <p><br><br>Trainings!!<br><br>Wednesday 19:00-21:00 at Tweede Oosterparkstraat 33<br>Fridays 19:00-21:00 at James Wattstraat 10</p>
-        <p><br>€35 for non-students and €30 for students per month.</p>
-        <p><br>Gratis proefles kan altijd!</p>
+        <div class="info_lang" id="info-english">
+          <p><br><br>Trainings!!<br><br>Wednesday 19:00-21:00 at Tweede Oosterparkstraat 33<br>Fridays 19:00-21:00 at James Wattstraat 10</p>
+          <p><br>€35 for non-students and €30 for students per month.</p>
+          <p><br>Free trial sessions always possible!</p>
+        </div>
+        <div class="info_lang" id="info-nederlands">
+          <p><br><br>Trainingen!!<br><br>Woensdag 19:00-21:00 op Tweede Oosterparkstraat 33<br>Vrijdag 19:00-21:00 op James Wattstraat 10</p>
+          <p><br>€35 voor niet-studenten en €30 voor studenten per maand.</p>
+          <p><br>Gratis proefsessies altijd mogelijk!</p>
+        </div>
       </div>
     </div>
   </div>
@@ -102,42 +126,17 @@
     </div>
 
   </div>
-  <div class="item" id="about">
-    <h2 style="padding-top:20px">About</h2>
+  <div class="item" id="contact">
+    <h2 style="padding-top:20px">Contact</h2>
     <div class="info_container">
-      <div class="info_field"></div>
+      <div class="info_field">
+        <p><br><br><br><br><br><br><br>Email amsterdamwushu@gmail.com</p>
+      </div>
     </div>
   </div>
 
-<script>
-  // Get the button
-  let mybutton = document.getElementById("move_up");
-
-  // When the user scrolls down 20px from the top of the document, show the button
-  window.onscroll = function() {scrollFunction()};
-
-  function scrollFunction() {
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 200) {
-      mybutton.style.display = "block";
-    } else {
-      mybutton.style.display = "none";
-    }
-  }
-
-  // When the user clicks on the button, scroll to the top of the document
-  function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }
-
-  $("img").on('click',function(){
-    var style = $(this).attr('data-id');
-    $('.hideDivs').hide();
-    $('#'+style).show();
-  });
-
-</script>
-
+  <script src="script.js"></script>
 
 </body>
-</html
+
+</html>
