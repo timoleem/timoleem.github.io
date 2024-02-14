@@ -1,44 +1,104 @@
-// Get the button
-let mybutton = document.getElementById("move_up");
+const kiwi = document.getElementById('kiwi');
 
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+let kiwiLeft = 0;
+let kiwiBottom = 0;
+let isFacingLeft = false; // Keep track of Kiwi's facing direction
+let isJumping = false; // Keep track of whether Kiwi is currently jumping
+let isMovingLeft = false; // Keep track of whether Kiwi is moving left
+let isMovingRight = false; // Keep track of whether Kiwi is moving right
+let jumpInterval; // Interval for the jump animation
+let fallInterval; // Interval for the fall animation
+const jumpHeight = 150; // Adjust as needed
+const gravity = .9; // Adjust as needed
 
-function scrollFunction() {
-  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 200) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
+let jumpStep = 14; // Adjust for faster jump speed
+let fallStep = 3; // Adjust for faster fall speed
+
+let jumpIntervalDuration = 10; // Decrease for smoother jump animation
+let fallIntervalDuration = 10; // Decrease for smoother fall animation
+
+function moveKiwi() {
+  let moveStep = 3; // Adjust for faster movement speed
+
+  if (isMovingLeft) {
+    kiwiLeft -= moveStep;
+    if (!isFacingLeft) {
+      kiwi.classList.add('kiwi-flipped');
+      isFacingLeft = true;
+    }
+  } else if (isMovingRight) {
+    kiwiLeft += moveStep;
+    if (isFacingLeft) {
+      kiwi.classList.remove('kiwi-flipped');
+      isFacingLeft = false;
+    }
+  }
+
+  kiwi.style.left = `${kiwiLeft}px`;
+
+  requestAnimationFrame(moveKiwi);
+}
+
+function startJump() {
+  if (!isJumping) {
+    isJumping = true;
+    let jumpStart = kiwiBottom;
+    jumpInterval = setInterval(function() {
+      kiwiBottom += jumpStep;
+      kiwi.style.bottom = `${kiwiBottom}px`;
+      jumpStep -= gravity; // Apply gravity to decrease jump step
+      if (kiwiBottom - jumpStart >= jumpHeight || jumpStep <= 0) { // Stop jumping when reaching max height or jump step becomes zero
+        clearInterval(jumpInterval);
+        startFall();
+      }
+    }, jumpIntervalDuration);
   }
 }
 
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
+function startFall() {
+  fallInterval = setInterval(function() {
+    kiwiBottom -= fallStep;
+    kiwi.style.bottom = `${kiwiBottom}px`;
+    if (kiwiBottom <= 0) {
+      kiwiBottom = 0;
+      kiwi.style.bottom = `${kiwiBottom}px`;
+      clearInterval(fallInterval);
+      isJumping = false;
+      jumpStep = 14; // Reset jump step for next jump
+    }
+  }, fallIntervalDuration);
 }
 
-$("img").on('click',function(){
-  var style = $(this).attr('data-id');
-  $('.hideDivs').hide();
-  $('#'+style).show();
+function applyGravity() {
+  if (!isJumping && kiwiBottom > 0) {
+    kiwiBottom -= gravity;
+    kiwi.style.bottom = `${kiwiBottom}px`;
+  }
+}
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'ArrowLeft') {
+    isMovingLeft = true;
+  } else if (event.key === 'ArrowRight') {
+    isMovingRight = true;
+  } else if (event.key === 'ArrowUp') { // Space key for jumping
+    startJump();
+  }
 });
 
-function changeLanguage() {
-  var selectedLanguage = document.getElementById("language-select").value;
-
-  // Hide/show content based on the selected language
-  if (selectedLanguage === "english") {
-    document.getElementById("welcome-english").style.display = "block";
-    document.getElementById("welcome-nederlands").style.display = "none";
-    document.getElementById("info-english").style.display = "block";
-    document.getElementById("info-nederlands").style.display = "none";
-  } else if (selectedLanguage === "nederlands") {
-    document.getElementById("welcome-english").style.display = "none";
-    document.getElementById("welcome-nederlands").style.display = "block";
-    document.getElementById("info-english").style.display = "none";
-    document.getElementById("info-nederlands").style.display = "block";
+document.addEventListener('keyup', function(event) {
+  if (event.key === 'ArrowLeft') {
+    isMovingLeft = false;
+  } else if (event.key === 'ArrowRight') {
+    isMovingRight = false;
   }
+});
 
-  console.log("Selected Language: " + selectedLanguage);
-}
+// Apply gravity continuously
+setInterval(applyGravity, 20);
+
+// Initialize kiwiBottom to its initial position
+kiwiBottom = parseInt(window.getComputedStyle(kiwi).bottom);
+
+// Start moving the kiwi
+requestAnimationFrame(moveKiwi);
