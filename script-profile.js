@@ -2,7 +2,7 @@ const kiwi = document.getElementById('kiwi');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const toggleBtn = document.getElementById('toggle-btn');
-const tree = document.getElementById('tree');
+const rocket = document.getElementById('rocket');
 const enterText = document.getElementById('enter-text');
 
 let kiwiLeft = 0;
@@ -21,16 +21,10 @@ let jumpIntervalDuration = 12; // Decrease for smoother jump animation
 let fallIntervalDuration = 6; // Decrease for smoother fall animation
 let isDayTime = true;
 let gravityInterval;
+let isInShuttle = false;
 
 // Start the interval
 gravityInterval = setInterval(applyGravity, 20);
-
-// Define platforms
-const platforms = [
-  { left: 100, bottom: 50, width: 200, height: 20 },
-  { left: 300, bottom: 150, width: 150, height: 20 },
-  { left: 500, bottom: 250, width: 300, height: 30 },
-];
 
 toggleBtn.addEventListener('click', function() {
   isDayTime = !isDayTime;
@@ -57,8 +51,6 @@ function moveKiwi() {
     }
   }
   kiwi.style.left = `${kiwiLeft}px`;
-
-  // updateHeight(kiwiBottom)
   requestAnimationFrame(moveKiwi);
 }
 
@@ -69,11 +61,6 @@ function startFall() {
     if (kiwiBottom <= 0) {
       kiwiBottom = 0;
       kiwi.style.bottom = `${kiwiBottom}px`;
-      clearInterval(fallInterval);
-      isJumping = false;
-      jumpStep = 14; // Reset jump step for next jump
-    } else if (isOnPlatform()) {
-      // Stop falling when kiwi's bottom position is at or above the platform's top position plus its height
       clearInterval(fallInterval);
       isJumping = false;
       jumpStep = 14; // Reset jump step for next jump
@@ -97,30 +84,8 @@ function startJump() {
   }
 }
 
-function isOnPlatform() {
-  for (let i = 0; i < platforms.length; i++) {
-    let platform = platforms[i];
-    let kiwiRect = kiwi.getBoundingClientRect();
-    let platformRect = {
-      left: platform.left,
-      right: platform.left + platform.width,
-      top: canvas.offsetHeight - platform.bottom - platform.height,
-      bottom: canvas.offsetHeight - platform.bottom - platform.height,
-    };
-    if (
-      kiwiRect.bottom >= platformRect.top &&
-      kiwiRect.top <= platformRect.bottom - 1.5*platform.height &&
-      kiwiRect.right >= platformRect.left &&
-      kiwiRect.left <= platformRect.right
-    ) {
-      return true;
-    }
-  }
-  return false;
-}
-
 function applyGravity() {
-  if (!isJumping && kiwiBottom > 0 && !isOnPlatform(kiwiBottom)) {
+  if (!isJumping && kiwiBottom > 0) {
     kiwiBottom -= 5;
     kiwi.style.bottom = `${kiwiBottom}px`;
     if (kiwiBottom <= 0) {
@@ -133,16 +98,40 @@ function applyGravity() {
   }
 }
 
-function updateHeight(height) {
+function updateHeight() {
   // Clear the area within the square
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   // Display the height value of the kiwi
   ctx.fillStyle = 'black';
   ctx.font = '0.6em Consolas'; // Using em units
   ctx.weight = 'bold';
-  ctx.fillText('Height kiwi: ' + Math.floor(height), parseInt(10),parseInt(10));
-  const platform2 = document.getElementById('platform2');
-  const platform2Rect = platform2.getBoundingClientRect();
+  //
+  const rocketRect = rocket.getBoundingClientRect();
+  ctx.fillText('kiwileft: ' + rocketRect.bottom, parseInt(10),parseInt(10));
+}
+
+function isNearShuttle() {
+  const kiwiRect = kiwi.getBoundingClientRect();
+  const shuttleRect = rocket.getBoundingClientRect();
+
+  return (
+    kiwiRect.left >= shuttleRect.left +20 &&
+    kiwiRect.right <= shuttleRect.right -20 &&
+    kiwiRect.bottom <= shuttleRect.bottom -20 &&
+    kiwiRect.top >= shuttleRect.top
+  );
+}
+
+function enterShuttle() {
+  isInShuttle = true;
+  kiwi.style.bottom = '0';
+  kiwi.style.left = '50%';
+}
+
+function exitShuttle() {
+  isInShuttle = false;
+  kiwi.style.bottom = '0';
+  kiwi.style.left = '0';
 }
 
 document.addEventListener('keydown', function(event) {
@@ -153,24 +142,17 @@ document.addEventListener('keydown', function(event) {
   } else if (event.key === 'ArrowUp') { // Space key for jumping
     startJump();
   } else if (event.key === ' ') { // Space key for entering the tree
-    if (isWithinTreeBounds()) { // Check if kiwi is near the tree
-      enterTree();
+    if (isNearShuttle()) { // Check if kiwi is near the tree
+      enterRocket();
     }
+  }
+  kiwi.style.left = `${kiwiLeft}px`;
+  if (!isInShuttle && isNearShuttle()) {
+    enterShuttle();
   }
 });
 
-function isWithinTreeBounds() {
-  const treeRect = tree.getBoundingClientRect();
-  const kiwiRect = kiwi.getBoundingClientRect();
-  return (
-    kiwiRect.left >= treeRect.left &&
-    kiwiRect.right <= treeRect.right &&
-    kiwiRect.bottom <= treeRect.bottom &&
-    kiwiRect.top >= treeRect.top
-  );
-}
-
-function enterTree() {
+function enterRocket() {
   // Code to execute when kiwi enters the tree
   window.location.href = 'profile.html';
 }
@@ -186,7 +168,7 @@ document.addEventListener('keyup', function(event) {
 // Event listener to show the enter text when kiwi is within bounds of the tree
 document.addEventListener('keydown', function(event) {
   if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-    if (isWithinTreeBounds()) {
+    if (isWithinRocketBounds()) {
       enterText.style.display = 'block';
     } else {
       enterText.style.display = 'none';

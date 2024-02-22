@@ -64,6 +64,17 @@ body {
   cursor: pointer; /* Change cursor to pointer when hovering over the tree */
 }
 
+.rocket {
+  width: 200px;
+  height: 200px;
+  background-image: url('img/rocket.png'); /* Set the image of the tree */
+  background-size: cover;
+  position: absolute;
+  bottom: 0; /* Adjust as needed */
+  left: 550px; /* Adjust as needed */
+  cursor: pointer; /* Change cursor to pointer when hovering over the tree */
+}
+
 #day-night-img {
   width: 40px;
   height: 40px;
