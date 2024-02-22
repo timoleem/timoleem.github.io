@@ -5,6 +5,9 @@ const ctx = canvas.getContext('2d');
 const toggleBtn = document.getElementById('toggle-btn');
 const dayNightImg = document.getElementById('day-night-img');
 
+const tree = document.getElementById('tree');
+const enterText = document.getElementById('enter-text');
+
 let kiwiLeft = 0;
 let kiwiBottom = 0;
 let isFacingLeft = false; // Keep track of Kiwi's facing direction
@@ -20,6 +23,10 @@ let fallStep = 3; // Adjust for faster fall speed
 let jumpIntervalDuration = 12; // Decrease for smoother jump animation
 let fallIntervalDuration = 6; // Decrease for smoother fall animation
 let isDayTime = true;
+let gravityInterval;
+
+// Start the interval
+gravityInterval = setInterval(applyGravity, 20);
 
 // Define platforms
 const platforms = [
@@ -39,7 +46,6 @@ toggleBtn.addEventListener('click', function() {
 
 function moveKiwi() {
   let moveStep = 6; // Adjust for faster movement speed
-
   if (isMovingLeft) {
     kiwiLeft -= moveStep;
     if (!isFacingLeft) {
@@ -53,11 +59,7 @@ function moveKiwi() {
       isFacingLeft = false;
     }
   }
-
   kiwi.style.left = `${kiwiLeft}px`;
-
-  // updateHeight(kiwiBottom);
-
   requestAnimationFrame(moveKiwi);
 }
 
@@ -118,12 +120,6 @@ function isOnPlatform() {
   return false;
 }
 
-// Define the interval for applying gravity
-let gravityInterval;
-
-// Start the interval
-gravityInterval = setInterval(applyGravity, 20);
-
 function applyGravity() {
   if (!isJumping && kiwiBottom > 0 && !isOnPlatform(kiwiBottom)) {
     kiwiBottom -= 5;
@@ -141,32 +137,13 @@ function applyGravity() {
 function updateHeight(height) {
   // Clear the area within the square
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
   // Display the height value of the kiwi
   ctx.fillStyle = 'black';
   ctx.font = '0.6em Consolas'; // Using em units
   ctx.weight = 'bold';
   ctx.fillText('Height kiwi: ' + Math.floor(height), parseInt(10),parseInt(10));
-
   const platform2 = document.getElementById('platform2');
   const platform2Rect = platform2.getBoundingClientRect();
-
-  //
-  // let platformRect = {
-  //   left: platform2.left,
-  //   right: platform2.left + platform2.width,
-  //   top: canvas.offsetHeight - platform2.bottom - platform2.height,
-  //   bottom: canvas.offsetHeight - platform2.bottom - platform2.height,
-  // };
-
-  ctx.fillText('bottom platform2: ' + Math.ceil(platform2Rect.bottom), parseInt(10),parseInt(20));
-  ctx.fillText('top platform2: ' + Math.ceil(platform2Rect.top), parseInt(10),parseInt(30));
-  ctx.fillText('height platform2: ' + Math.ceil(platform2Rect.height), parseInt(10),parseInt(40));
-  ctx.fillText('right platform2: ' + Math.ceil(platform2Rect.right), parseInt(10),parseInt(50));
-  ctx.fillText('left platform2: ' + Math.ceil(platform2Rect.left), parseInt(10),parseInt(60));
-
-  ctx.fillText('canvas offsetheight: ' + Math.ceil(canvas.offsetHeight), parseInt(10),parseInt(70));
-  ctx.fillText('canvas top: ' + Math.ceil(canvas.offsetHeight - platform2Rect.bottom - platform2Rect.height), parseInt(10),parseInt(80));
 }
 
 document.addEventListener('keydown', function(event) {
@@ -176,14 +153,45 @@ document.addEventListener('keydown', function(event) {
     isMovingRight = true;
   } else if (event.key === 'ArrowUp') { // Space key for jumping
     startJump();
+  } else if (event.key === ' ') { // Space key for entering the tree
+    if (isWithinTreeBounds()) { // Check if kiwi is near the tree
+      enterTree();
+    }
   }
 });
+
+function isWithinTreeBounds() {
+  const treeRect = tree.getBoundingClientRect();
+  const kiwiRect = kiwi.getBoundingClientRect();
+  return (
+    kiwiRect.left >= treeRect.left &&
+    kiwiRect.right <= treeRect.right &&
+    kiwiRect.bottom <= treeRect.bottom &&
+    kiwiRect.top >= treeRect.top
+  );
+}
+
+function enterTree() {
+  // Code to execute when kiwi enters the tree
+  window.location.href = 'profile.html';
+}
 
 document.addEventListener('keyup', function(event) {
   if (event.key === 'ArrowLeft') {
     isMovingLeft = false;
   } else if (event.key === 'ArrowRight') {
     isMovingRight = false;
+  }
+});
+
+// Event listener to show the enter text when kiwi is within bounds of the tree
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    if (isWithinTreeBounds()) {
+      enterText.style.display = 'block';
+    } else {
+      enterText.style.display = 'none';
+    }
   }
 });
 

@@ -6,8 +6,8 @@ body {
 
 #canvas {
   width: 100%;
-  height: 100vh; /* Use full viewport height */
-  background-color: #e5eff7; /* #e5eff7; */
+  height: 100vh;
+  background-color: #e5eff7;
   display: block;
   position: absolute;
   top: 0;
@@ -22,8 +22,7 @@ body {
 
 .platform {
   position: absolute;
-  background-color: #333;
-  /* Default width and height for platforms */
+  background-color: #541000;
   width: 200px;
   height: 20px;
 }
@@ -31,32 +30,46 @@ body {
 #platform1 {
   bottom: 50px; /* Adjust as needed */
   left: 100px; /* Adjust as needed */
-  width: 200px;
 }
 
 #platform2 {
   bottom: 150px; /* Adjust as needed */
   left: 300px; /* Adjust as needed */
-  width: 150px;
 }
 
 #platform3 {
   bottom: 250px; /* Adjust as needed */
   left: 500px; /* Adjust as needed */
   height: 30px;
-  width: 300px;
 }
-/* Add more styling for additional platforms */
 
-#game-container {
-  width: 800px;
-  height: 600px;
-  background-color: #5c94fc;
-  position: relative;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 5%;
-  margin-bottom: 5%;
+#enter-text {
+  position: absolute;
+  bottom: 480px; /* Adjust vertical position of the text */
+  left: 750px; /* Adjust horizontal position of the text */
+  display: none; /* Hide the text by default */
+  color: black; /* Change text color */
+  font-size: 20px; /* Change text size */
+  font-family: "Bradley Hand"
+}
+
+.tree {
+  width: 200px;
+  height: 200px;
+  background-image: url('img/oak-big.png'); /* Set the image of the tree */
+  background-size: cover;
+  position: absolute;
+  bottom: 270px; /* Adjust as needed */
+  left: 550px; /* Adjust as needed */
+  cursor: pointer; /* Change cursor to pointer when hovering over the tree */
+}
+
+#day-night-img {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 #kiwi {
@@ -68,14 +81,6 @@ body {
   bottom: 0;
   left: 0;
   transition: transform 0.3s ease; /* Add a transition for smooth flipping */
-}
-
-#day-night-img {
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
 }
 
 .kiwi-flipped {
