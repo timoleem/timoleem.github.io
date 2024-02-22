@@ -2,6 +2,9 @@ const kiwi = document.getElementById('kiwi');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
+const toggleBtn = document.getElementById('toggle-btn');
+const dayNightImg = document.getElementById('day-night-img');
+
 let kiwiLeft = 0;
 let kiwiBottom = 0;
 let isFacingLeft = false; // Keep track of Kiwi's facing direction
@@ -10,20 +13,29 @@ let isMovingLeft = false; // Keep track of whether Kiwi is moving left
 let isMovingRight = false; // Keep track of whether Kiwi is moving right
 let jumpInterval; // Interval for the jump animation
 let fallInterval; // Interval for the fall animation
-const jumpHeight = 250; // Adjust as needed
+const jumpHeight = 200; // Adjust as needed
 const gravity = .7; // Adjust as needed
 let jumpStep = 14; // Adjust for faster jump speed
 let fallStep = 3; // Adjust for faster fall speed
 let jumpIntervalDuration = 12; // Decrease for smoother jump animation
 let fallIntervalDuration = 6; // Decrease for smoother fall animation
+let isDayTime = true;
 
 // Define platforms
 const platforms = [
   { left: 100, bottom: 50, width: 200, height: 20 },
   { left: 300, bottom: 150, width: 150, height: 20 },
   { left: 500, bottom: 250, width: 300, height: 30 },
-  // Add more platforms as needed
 ];
+
+toggleBtn.addEventListener('click', function() {
+  isDayTime = !isDayTime;
+  if (isDayTime) {
+    canvas.style.backgroundColor = '#e5eff7'; // Day time color
+  } else {
+    canvas.style.backgroundColor = '#225566'; // Night time color
+  }
+});
 
 function moveKiwi() {
   let moveStep = 6; // Adjust for faster movement speed
@@ -44,7 +56,7 @@ function moveKiwi() {
 
   kiwi.style.left = `${kiwiLeft}px`;
 
-  updateHeight(kiwiBottom);
+  // updateHeight(kiwiBottom);
 
   requestAnimationFrame(moveKiwi);
 }
@@ -96,7 +108,7 @@ function isOnPlatform() {
     };
     if (
       kiwiRect.bottom >= platformRect.top &&
-      kiwiRect.top <= platformRect.bottom + platform.height &&
+      kiwiRect.top <= platformRect.bottom - 1.5*platform.height &&
       kiwiRect.right >= platformRect.left &&
       kiwiRect.left <= platformRect.right
     ) {
@@ -114,8 +126,15 @@ gravityInterval = setInterval(applyGravity, 20);
 
 function applyGravity() {
   if (!isJumping && kiwiBottom > 0 && !isOnPlatform(kiwiBottom)) {
-    kiwiBottom -= 7;
+    kiwiBottom -= 5;
     kiwi.style.bottom = `${kiwiBottom}px`;
+    if (kiwiBottom <= 0) {
+      kiwiBottom = 0;
+      kiwi.style.bottom = `${kiwiBottom}px`;
+      clearInterval(fallInterval);
+      isJumping = false;
+      jumpStep = 14; // Reset jump step for next jump
+    }
   }
 }
 

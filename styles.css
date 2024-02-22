@@ -7,11 +7,17 @@ body {
 #canvas {
   width: 100%;
   height: 100vh; /* Use full viewport height */
-  background-color: #5c94fc;
+  background-color: #e5eff7; /* #e5eff7; */
   display: block;
   position: absolute;
   top: 0;
   left: 0;
+}
+
+#toggle-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .platform {
@@ -62,6 +68,14 @@ body {
   bottom: 0;
   left: 0;
   transition: transform 0.3s ease; /* Add a transition for smooth flipping */
+}
+
+#day-night-img {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .kiwi-flipped {
